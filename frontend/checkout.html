@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | GlowNest</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="logo">GlowNest</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+    </nav>
+</header>
+<div class="customer-info">
+
+    <input type="text" id="customerName"
+           placeholder="Full Name" required>
+
+    <input type="text" id="customerPhone"
+           placeholder="Phone Number" required>
+
+    <input type="text" id="customerCity"
+           placeholder="City" required>
+
+    <textarea id="customerAddress"
+              placeholder="Delivery Address"
+              required></textarea>
+
+</div>
+
+<section class="checkout-container">
+
+    <h2>Checkout Now!</h2>
+
+    <div id="checkoutItems"></div>
+
+    <div class="checkout-summary">
+
+        <h3 id="totalAmount">
+            Total: Rs 0
+        </h3>
+
+        <button id="placeOrderBtn">
+            Place Order
+        </button>
+
+    </div>
+
+</section>
+
+<script src="js/checkout.js"></script>
+
+</body>
+</html>

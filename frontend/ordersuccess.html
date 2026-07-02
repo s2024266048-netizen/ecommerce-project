@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Receipt | GlowNest</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="receipt-container">
+
+    <h1>🎉 Order Successful</h1>
+
+    <p>Thank you for shopping with GlowNest💖</p>
+
+    <div class="receipt-box">
+
+        <h2>Order Receipt</h2>
+
+        <hr>
+
+        <p><strong>Order ID:</strong> <span id="orderId"></span></p>
+
+        <p><strong>Customer:</strong> <span id="customerName"></span></p>
+
+        <p><strong>Total Amount:</strong> Rs <span id="orderTotal"></span></p>
+
+        <p><strong>Status:</strong> Order Confirmed ✅</p>
+
+        <p><strong>Date:</strong> <span id="orderDate"></span></p>
+
+    </div>
+
+    <a href="index.html">
+        <button class="receipt-btn">
+            Continue Shopping!
+        </button>
+    </a>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+document.getElementById("orderId").innerText =
+params.get("id");
+
+document.getElementById("customerName").innerText =
+params.get("name");
+
+document.getElementById("orderTotal").innerText =
+params.get("total");
+
+document.getElementById("orderDate").innerText =
+new Date().toLocaleDateString();
+
+</script>
+
+</body>
+</html>
