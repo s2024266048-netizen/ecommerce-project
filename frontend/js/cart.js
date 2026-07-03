@@ -3,7 +3,7 @@ const totalPriceElement = document.getElementById("cartTotal");
 
 let total = 0;
 
-fetch("http://localhost:5000/api/cart/1")
+fetch("https://ecommerce-project-production-e015.up.railway.app/api/cart/1")
 .then(response => response.json())
 .then(items => {
 
@@ -43,8 +43,9 @@ fetch("http://localhost:5000/api/cart/1")
 
                 <p>Quantity: ${item.quantity}</p>
 
+                <p>Subtotal: Rs ${itemTotal}</p>
+
                 <button onclick="removeItem(${item.id})">
-                
                     Remove
                 </button>
 
@@ -67,22 +68,24 @@ fetch("http://localhost:5000/api/cart/1")
 
 function removeItem(cartId){
 
-    fetch(`http://localhost:5000/api/cart/${cartId}`,{
+    fetch(`https://ecommerce-project-production-e015.up.railway.app/api/cart/${cartId}`, {
 
-        method:"DELETE"
+        method: "DELETE"
 
     })
     .then(response => response.json())
     .then(data => {
 
-        alert("Item Removed Successfully");
-
-        location.reload();
+        if(data.success){
+            alert("Item Removed Successfully");
+            location.reload();
+        }
 
     })
     .catch(err => {
 
         console.log(err);
+        alert(" Failed To Remove Item");
 
     });
 

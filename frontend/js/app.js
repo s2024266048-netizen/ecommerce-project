@@ -1,6 +1,6 @@
 const productContainer = document.getElementById("products");
 
-fetch("http://localhost:5000/api/products")
+fetch("https://ecommerce-project-production-e015.up.railway.app/api/products")
 .then(response => response.json())
 .then(products => {
 
@@ -12,7 +12,7 @@ fetch("http://localhost:5000/api/products")
 
         <div class="card">
 
-            <img src="images/${product.image}" alt="${product.name}">
+            <img src="Images/${product.image}" alt="${product.name}">
 
             <div class="card-content">
 
@@ -39,11 +39,16 @@ fetch("http://localhost:5000/api/products")
         </div>
 
         `;
+
     });
 
 })
 .catch(error => {
 
-    console.log(error);
+    console.log("Products Error:", error);
+
+    productContainer.innerHTML = `
+        <h2>Products failed to load </h2>
+    `;
 
 });

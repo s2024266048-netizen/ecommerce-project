@@ -2,15 +2,13 @@ const checkoutItems = document.getElementById("checkoutItems");
 const totalAmount = document.getElementById("totalAmount");
 const placeOrderBtn = document.getElementById("placeOrderBtn");
 
-const user_id = 1; // Testing user
+const user_id = 1;
 
 let total = 0;
 
-// ======================
 // LOAD CART ITEMS
-// ======================
 
-fetch(`http://localhost:5000/api/cart/${user_id}`)
+fetch(`https://ecommerce-project-production-e015.up.railway.app/api/cart/${user_id}`)
 .then(res => res.json())
 .then(data => {
 
@@ -24,7 +22,6 @@ fetch(`http://localhost:5000/api/cart/${user_id}`)
         `;
 
         totalAmount.innerText = "Total: Rs 0";
-
         return;
     }
 
@@ -63,16 +60,13 @@ fetch(`http://localhost:5000/api/cart/${user_id}`)
 });
 
 
-// ======================
 // PLACE ORDER
-// ======================
 
 placeOrderBtn.addEventListener("click", () => {
 
     if(total === 0){
 
         alert("Cart is empty!");
-
         return;
     }
 
@@ -96,11 +90,10 @@ placeOrderBtn.addEventListener("click", () => {
     ){
 
         alert("Please fill all fields");
-
         return;
     }
 
-    fetch("http://localhost:5000/api/orders/place", {
+    fetch("https://ecommerce-project-production-e015.up.railway.app/api/orders/place", {
 
         method: "POST",
 
@@ -130,8 +123,8 @@ placeOrderBtn.addEventListener("click", () => {
                 `🎉 Order Placed Successfully!\n\nOrder ID: ${data.orderId}`
             );
 
-     window.location.href =
-     `order-success.html?id=${data.orderId}&name=${encodeURIComponent(customer_name)}&total=${total}`;
+            window.location.href =
+            `ordersuccess.html?id=${data.orderId}&name=${encodeURIComponent(customer_name)}&total=${total}`;
 
         }else{
 

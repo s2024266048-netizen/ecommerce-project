@@ -13,7 +13,7 @@ const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
 const response = await fetch(
-"http://localhost:5000/api/auth/register",
+"https://ecommerce-project-production-e015.up.railway.app/api/auth/register",
 {
 method:"POST",
 headers:{
@@ -31,7 +31,9 @@ const data = await response.json();
 
 alert(data.message);
 
+if(data.success){
 window.location.href="login.html";
+}
 
 });
 
@@ -52,7 +54,7 @@ const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
 const response = await fetch(
-"http://localhost:5000/api/auth/login",
+"https://ecommerce-project-production-e015.up.railway.app/api/auth/login",
 {
 method:"POST",
 headers:{
@@ -71,7 +73,7 @@ if(data.token){
 
 localStorage.setItem("token", data.token);
 
-alert("Login Successful 💖");
+alert("Login Successfull");
 
 window.location.href="index.html";
 
@@ -84,4 +86,3 @@ alert(data.message);
 });
 
 }
-
