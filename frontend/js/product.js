@@ -50,6 +50,7 @@ console.log("Product Detail Error:", error);
 productContainer.innerHTML =
 "<h2>Failed to load product</h2>";
 
+
 });
 
 }
