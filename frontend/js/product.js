@@ -7,8 +7,9 @@ fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${produ
 .then(response => response.json())
 .then(product => {
 
-    productContainer.innerHTML = `
+    console.log(product);
 
+    productContainer.innerHTML = `
     <div class="detail-card">
 
         <div class="detail-image">
@@ -29,54 +30,14 @@ fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${produ
                 Rs ${product.price}
             </div>
 
-            <button onclick="addToCart(${product.id})">
-                Add To Cart
-            </button>
-
         </div>
 
     </div>
-
     `;
-
 })
 .catch(error => {
-
     console.log("Product Error:", error);
 
-    productContainer.innerHTML = `
-        <h2>Product failed to load 😢</h2>
-    `;
+    productContainer.innerHTML =
+    "<h2>Product failed to load</h2>";
 });
-
-function addToCart(productId){
-
-    fetch("https://ecommerce-project-production-e015.up.railway.app/api/cart/add", {
-
-        method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-            user_id: 1,
-            product_id: productId,
-            quantity: 1
-        })
-
-    })
-    .then(response => response.json())
-    .then(data => {
-
-        alert(data.message || "Product Added To Cart");
-
-    })
-    .catch(error => {
-
-        console.log(error);
-        alert("Something went wrong");
-
-    });
-
-}
