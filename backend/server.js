@@ -1,38 +1,51 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
-
-dotenv.config();
-
+const mysql = require("mysql2");
+require("dotenv").config();
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Database Connection
-require("./config/db");
-
-// Routes
-const authRoutes = require("./routes/authRoutes");
-const productRoutes = require("./routes/productRoutes");
-const cartRoutes = require("./routes/cartRoutes");
-const orderRoutes = require("./routes/orderRoutes");
-
-// API Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/cart", cartRoutes);
-app.use("/api/orders", orderRoutes);
-
-// Home Route
-app.get("/", (req, res) => {
-  res.send("E-Commerce API Running 🚀");
+// DB
+const db = mysql.createConnection({
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
 });
 
-// Start Server
-const PORT = process.env.PORT || 5000;
+console.log("HOST:", process.env.MYSQLHOST);
+console.log("PORT:", process.env.MYSQLPORT);
+console.log("USER:", process.env.MYSQLUSER);
+console.log("DB:", process.env.MYSQLDATABASE);
+ db.connect((err) => {
+  if(err)  {
+    console.log("DB ERROR:",
+      err.message);
+    
+  }else {
+    console.log("DB CONNECTED");
+  }
+ })
+// TEST ROUTE
+app.get("/", (req, res) => {
+  res.send("API Working 🚀");
+});
 
-app.listen(PORT,"0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
+// ✅ PRODUCTS ROUTE (IMPORTANT)
+app.get("/products", (req, res) => {
+  db.query("SELECT * FROM products", (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+    res.json(result);
+  });
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log("Server running");
 });
