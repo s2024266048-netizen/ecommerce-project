@@ -3,7 +3,7 @@ const productContainer = document.getElementById("productDetail");
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
-fetch(`https://ecommerce-project-production-e015.up.railway.app/api/products/${productId}`)
+fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${productId}`)
 .then(response => response.json())
 .then(product => {
 

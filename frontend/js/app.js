@@ -1,6 +1,6 @@
 const productContainer = document.getElementById("products");
 
-fetch("https://ecommerce-project-production-e015.up.railway.app/api/products")
+fetch("https://ecommerce-project-production-e015.up.railway.app/products")
 .then(response => response.json())
 .then(products => {
 
@@ -17,7 +17,7 @@ fetch("https://ecommerce-project-production-e015.up.railway.app/api/products")
             <div class="card-content">
 
                 <span class="category-badge">
-                    ${product.category_name}
+                    Category ${product.category_id}
                 </span>
 
                 <h3>${product.name}</h3>
@@ -39,7 +39,6 @@ fetch("https://ecommerce-project-production-e015.up.railway.app/api/products")
         </div>
 
         `;
-
     });
 
 })
@@ -48,7 +47,7 @@ fetch("https://ecommerce-project-production-e015.up.railway.app/api/products")
     console.log("Products Error:", error);
 
     productContainer.innerHTML = `
-        <h2>Products failed to load </h2>
+        <h2>Products failed to load !</h2>
     `;
 
 });
