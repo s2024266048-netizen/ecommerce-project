@@ -18,7 +18,7 @@ fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${produ
         <div class="detail-info">
 
             <span class="category-badge">
-                ${product.category_name}
+                Category ${product.category_id}
             </span>
 
             <h1>${product.name}</h1>
@@ -41,7 +41,12 @@ fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${produ
 
 })
 .catch(error => {
+
     console.log("Product Error:", error);
+
+    productContainer.innerHTML = `
+        <h2>Product failed to load 😢</h2>
+    `;
 });
 
 function addToCart(productId){
@@ -61,15 +66,10 @@ function addToCart(productId){
         })
 
     })
-
     .then(response => response.json())
     .then(data => {
 
-        if(data.success){
-            alert("Product Added To Cart");
-        }else{
-            alert("Failed To Add Product");
-        }
+        alert(data.message || "Product Added To Cart");
 
     })
     .catch(error => {
