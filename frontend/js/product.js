@@ -1,13 +1,13 @@
-const productContainer = document.getElementById("productDetail");
-
-const params = new URLSearchParams(window.location.search);
-const productId = params.get("id");
-
 fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${productId}`)
-.then(response => response.json())
+.then(res => res.json())
 .then(product => {
 
-    console.log(product);
+    console.log("PRODUCT:", product);
+
+    if(!product || !product.id){
+        productContainer.innerHTML = "<h2>Product is not loading</h2>";
+        return;
+    }
 
     productContainer.innerHTML = `
     <div class="detail-card">
@@ -19,25 +19,27 @@ fetch(`https://ecommerce-project-production-e015.up.railway.app/products/${produ
         <div class="detail-info">
 
             <span class="category-badge">
-                Category ${product.category_id}
+                ${product.category_name || ""}
             </span>
 
             <h1>${product.name}</h1>
 
             <p>${product.description}</p>
 
-            <div class="detail-price">
+            <div class="price">
                 Rs ${product.price}
             </div>
+
+            <button onclick="addToCart(${product.id})">
+                Add To Cart
+            </button>
 
         </div>
 
     </div>
     `;
 })
-.catch(error => {
-    console.log("Product Error:", error);
-
-    productContainer.innerHTML =
-    "<h2>Product failed to load</h2>";
+.catch(err => {
+    console.log("ERROR:", err);
+    productContainer.innerHTML = "<h2>Server Error</h2>";
 });
