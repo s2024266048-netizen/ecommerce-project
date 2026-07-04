@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="receipt-container">
+
+        <h1>🎉Order Placed Successfully!</h1>
+        <p>Your order has been confirmed.</p>
+
+        <div class="receipt-box">
+
+            <p>
+                <strong>Customer Name:</strong>
+                <span id="customerName"></span>
+            </p>
+
+            <p>
+                <strong>Order ID:</strong>
+                <span id="orderId"></span>
+            </p>
+
+            <p>
+                <strong>Total Amount:</strong>
+                Rs <span id="totalAmount"></span>
+            </p>
+
+            <p>
+                <strong>Order Status:</strong>
+                Confirmed!
+            </p>
+
+        </div>
+
+        <button class="receipt-btn" onclick="goHome()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+    <script>
+
+        const params = new URLSearchParams(window.location.search);
+
+        const customerName = params.get("name");
+        const orderId = params.get("id");
+        const total = params.get("total");
+
+        document.getElementById("customerName").textContent =
+            customerName || "Guest";
+
+        document.getElementById("orderId").textContent =
+            orderId || "N/A";
+
+        document.getElementById("totalAmount").textContent =
+            total || "0";
+
+        function goHome() {
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+</html>
