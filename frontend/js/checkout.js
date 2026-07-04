@@ -124,7 +124,7 @@ placeOrderBtn.addEventListener("click", () => {
             );
 
             window.location.href =
-            `ordersuccess.html?id=${data.orderId}&name=${encodeURIComponent(customer_name)}&total=${total}`;
+            `order-success.html?id=${data.orderId}&name=${encodeURIComponent(customer_name)}&total=${total}`;
 
         }else{
 
